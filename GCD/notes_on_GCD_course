@@ -1,0 +1,32 @@
+						NOTES:
+
+Creating a constant and binding it to a closure is exactly what the complier does when it sees a func statement. 
+
+
+typealias -- you can use this to make shortcuts while programming. The format is "typealias newname=oldname"
+
+functions and closures can return both functions and closures 
+
+functions and closures are the same thing.
+
+variable capture: suppose you have a varible declred within a fucntion and then you have another function define in the first function, after the varible is declared. Suppose the second function uses the variable. And the first function returns the second function. now, each return of the first function will have new copies of the variable for the second function which is being returned. i.e. they each capture a new copy of the varible.
+
+variable capture makes swift a fucntional programming language. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+									QUESTIONS:
+
+1. In the closure demonstration ( first exercise), why are there only 4 results to the array of closures. The code is executing 5 times so there should be 5 answers correct? 
+
