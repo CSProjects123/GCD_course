@@ -1,5 +1,6 @@
 						NOTES:
 
+LESSON 1
 Creating a constant and binding it to a closure is exactly what the complier does when it sees a func statement. 
 
 
@@ -12,6 +13,68 @@ functions and closures are the same thing.
 variable capture: suppose you have a varible declred within a fucntion and then you have another function define in the first function, after the varible is declared. Suppose the second function uses the variable. And the first function returns the second function. now, each return of the first function will have new copies of the variable for the second function which is being returned. i.e. they each capture a new copy of the varible.
 
 variable capture makes swift a fucntional programming language. 
+
+LESSON 2 
+
+grand central dispatch makes asynchronous programming easier and safer by hiding threads from the developer
+
+ GCD provides us with two types of queues - synchronous (serial) and asynchronous (concurrent)
+
+ There is a special queue called the main queue - this queue handles the UI of your app
+
+You can still have concurrent programming with Synchronous queues. We do have sperate threads running here. The differece between synchronous queues and asynchronous queues is tha the order in which the threads are being executed in the synchronous queue is predictable. 
+
+
+There are three aspects to the basic functionality of GCD: 
+1. create a queue - either from scratch or by reusing an existing queue ;
+2. get the Main queue 
+3. add a closure to a queue. 
+
+
+GCD was written in C, not in Swift, so GCD is made of functions and types, not classes and objects. 
+
+Following are the main functions in GCD:
+
+dispatch_q_t  - Represents a queue
+dispatch_q_create(): creates a queue from scratch. This takes two paramteres - name and type of the queue (serial or concurrent)
+
+You can sepcify serial by passing in "DISPATCH_UEUE_SERIAL" or "nil"
+
+
+iOS gives each app 4 extea queues on top of the main one - these are global queues: 
+
+QOS_CLASS_USER_INTERACTIVE; top priority 
+QOS_CLASS_USER_INITIATED; regular priority 
+QOS_CLASS_BACKGROUND; low 
+QOS_CLASS_UTILITY; lowest
+
+We can access these queues by the function "dispatch_get_global_queue()" 
+
+To get the main queue , you can use the "dispatch_get_main_queue" for this 
+
+To add closure to the queue , use the dispatch_async() function; it returns immediately after adding closure 
+
+
+When a framework can run in the background, it is said to be thread-safe. 
+Some frameworks, however, can only run in the apple main queue, UI kit and core data are part of this. YOu cant run anything from the UIKit in the background, or the app will crash intermittently. For core data, NSManagedObject can only be used in the same queue in which it was created . If it was created in the backgound, only use it in the background. It it was created in the Main queue, only use it in the main queue
+m,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
