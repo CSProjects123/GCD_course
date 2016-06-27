@@ -56,8 +56,54 @@ To add closure to the queue , use the dispatch_async() function; it returns imme
 
 
 When a framework can run in the background, it is said to be thread-safe. 
-Some frameworks, however, can only run in the apple main queue, UI kit and core data are part of this. YOu cant run anything from the UIKit in the background, or the app will crash intermittently. For core data, NSManagedObject can only be used in the same queue in which it was created . If it was created in the backgound, only use it in the background. It it was created in the Main queue, only use it in the main queue
-m,
+Some frameworks, however, can only run in the apple main queue, UI kit and core data are part of this. YOu cant run anything from the UIKit in the background, or the app will crash intermittently. For core data, NSManagedObject can only be used in the same queue in which it was created . If it was created in the backgound, only use it in the background. It it was created in the Main queue, only use it in the main queue. 
+
+
+
+
+								NOTES FROM LESSON 3
+
+
+
+A refresher on swift syntax:
+say we have something like let url = NSURL(string: BigImahes.seaLion.raValue)
+in this case, the URL may be a nil. i.e. a let value can take a nil. Here. url is an optional
+When this is used as a parameter, it can happen that the function does not take in optinals. So you will have to unwrap it with an exclamation point. 
+let imageData = NSData(contentsOfURl: url!)
+It is not good practice to have all these exclamatin points in swift code. You should try to put everything in the "if-let" clauses. 
+Note++ - you dont need to nest your if-let clauses. One if-let can have many "lets" separated by commas
+
+
+If the name ends in view - it belongs in the main queue.
+
+Not all of UIKit is htread unsafe. there are a few exception like UIIMage. But ALL the views are unsafe. 
+
+
+Something that you need to figure out:
+
+    @IBAction func simpleAsynchronousDownload(sender: UIBarButtonItem) {
+        
+        let url = NSURL(string: BigImages.shark.rawValue)
+        let download = dispatch_queue_create("download", nil)
+        dispatch_async(download) { () -> Void in
+            let data = NSData(contentsOfURL: url!)
+            let image = UIImage(data: data!)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.photoView.image = image!
+            })
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
